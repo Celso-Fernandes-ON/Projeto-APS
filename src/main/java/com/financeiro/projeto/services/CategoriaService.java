@@ -13,11 +13,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class CategoriaService {
     @Autowired
-    private CategoriaRepository repository;
+    private CategoriaRepository categoriaRepository;
 
     @Transactional
     public Categoria cadastrar(DadosCategoria dados) {
-        var categoria = repository.save(new Categoria(dados));
+        var categoria = categoriaRepository.save(new Categoria(dados.nome()));
         return categoria;
     }
 

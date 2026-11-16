@@ -27,9 +27,9 @@ public class LancamentoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(new DadosDetalhamentoLancamento(lancamento));
     }
     @GetMapping("/{id}")
-    public ResponseEntity detalhar(@PathVariable Long id){
-        var categoria = service.listar(id);
-        return ResponseEntity.ok(new DadosDetalhamentoCategoria(categoria));
+    public ResponseEntity<DadosDetalhamentoLancamento> detalhar(@PathVariable Long id){
+        var lancamento = service.detalhar(id);
+        return ResponseEntity.ok(new DadosDetalhamentoLancamento(lancamento));
     }
 
 }

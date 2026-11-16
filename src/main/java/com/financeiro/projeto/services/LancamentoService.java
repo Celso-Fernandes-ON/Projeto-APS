@@ -34,7 +34,7 @@ public class LancamentoService {
     public Page<DadosListagemLancamento> listar(Pageable paginacao){
         return repository.findAll(paginacao).map(DadosListagemLancamento::new);
     }
-    public Categoria detalharCategoria(Long id) {
+    public Categoria detalhar(Long id) {
         return repository.getReferenceById(id);
     }
 
