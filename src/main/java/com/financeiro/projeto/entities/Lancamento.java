@@ -1,5 +1,6 @@
 package com.financeiro.projeto.entities;
 
+import com.financeiro.projeto.dto.DadosAtualizarLancamento;
 import com.financeiro.projeto.dto.DadosCadastroLancamento;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -45,5 +46,12 @@ public class Lancamento {
         this.tipo = dados.tipo();
         this.pessoa = pessoa;
         this.categoria = categoria;
+    }
+    public void atualizarInformacoes(DadosAtualizarLancamento dados){
+        if (dados.descricao() != null) this.descricao = dados.descricao();
+        if (dados.dataVencimento() != null) this.dataVencimento = dados.dataVencimento();
+        if (dados.dataPagamento() != null) this.dataPagamento = dados.dataPagamento();
+        if (dados.valor() != null) this.valor = dados.valor();
+        if (dados.observacao() != null) this.observacao = dados.observacao();
     }
 }

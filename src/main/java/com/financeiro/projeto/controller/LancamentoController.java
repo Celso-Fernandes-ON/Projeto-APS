@@ -31,5 +31,14 @@ public class LancamentoController {
         var lancamento = service.detalhar(id);
         return ResponseEntity.ok(new DadosDetalhamentoLancamento(lancamento));
     }
+    @PutMapping
+    public ResponseEntity<DadosDetalhamentoLancamento> atualizar(@RequestBody @Valid DadosAtualizarLancamento dados){
+        return ResponseEntity.ok(new DadosDetalhamentoLancamento(service.atualizar(dados)));
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> excluir(@PathVariable Long id) {
+        service.excluir(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }

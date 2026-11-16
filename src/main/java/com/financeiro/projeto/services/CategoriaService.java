@@ -22,7 +22,7 @@ public class CategoriaService {
     }
 
     public Page<DadosDetalhamentoCategoria> listar(Pageable paginacao){
-        return repository.findAll(paginacao).map(DadosDetalhamentoCategoria::new);
+        return categoriaRepository.findAll(paginacao).map(DadosDetalhamentoCategoria::new);
     }
 
 }
