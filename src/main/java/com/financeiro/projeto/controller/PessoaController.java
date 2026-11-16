@@ -50,6 +50,11 @@ public class PessoaController {
         var pessoa = services.atualizarPessoa(dados);
         return ResponseEntity.ok(new DadosDetalhamentoPessoa(pessoa));
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> excluir(@PathVariable Long id){
+        services.excluir(id);
+        return ResponseEntity.noContent().build();
+    }
 
 
 }

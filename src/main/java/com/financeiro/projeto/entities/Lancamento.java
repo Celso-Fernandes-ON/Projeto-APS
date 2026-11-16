@@ -1,5 +1,6 @@
 package com.financeiro.projeto.entities;
 
+import com.financeiro.projeto.dto.DadosCadastroLancamento;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -35,11 +36,14 @@ public class Lancamento {
     @ManyToOne(fetch = FetchType.LAZY) @JoinColumn(name = "id_categoria")
     private Categoria categoria;
 
-    public Lancamento(String descricao, LocalDate dataVencimento, LocalDate dataPagamento, BigDecimal valor, String observacao) {
-        this.descricao = descricao;
-        this.dataVencimento = dataVencimento;
-        this.dataPagamento = dataPagamento;
-        this.valor = valor;
-        this.observacao = observacao;
+    public Lancamento(DadosCadastroLancamento dados, Pessoa pessoa, Categoria categoria) {
+        this.descricao = dados.descricao();
+        this.dataVencimento = dados.dataVencimento();
+        this.dataPagamento = dados.dataPagamento();
+        this.valor = dados.valor();
+        this.observacao = dados.observacao();
+        this.tipo = dados.tipo();
+        this.pessoa = pessoa;
+        this.categoria = categoria;
     }
 }
