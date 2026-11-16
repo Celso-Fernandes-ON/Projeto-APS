@@ -32,10 +32,14 @@ public class PessoaServices {
         return repository.getReferenceById(id);
     }
 
-    public void atualizarPessoa(@Valid DadosAtualizarPessoas dados) {
+    @Transactional
+    public Pessoa atualizarPessoa(@Valid DadosAtualizarPessoas dados) {
         var pessoa = repository.getReferenceById(dados.id());
         pessoa.atualizarInformacoesPesso(dados);
         return pessoa;
-
+    }
+    @Transactional
+    public void excluir(Long id){
+        repository.getReferenceById(id).excluir();
     }
 }

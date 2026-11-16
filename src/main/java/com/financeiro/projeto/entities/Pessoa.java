@@ -3,7 +3,6 @@ package com.financeiro.projeto.entities;
 import com.financeiro.projeto.dto.DadosAtualizarPessoas;
 import com.financeiro.projeto.dto.DadosCadastroPessoa;
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -37,6 +36,12 @@ public class Pessoa {
         if (dados.nome() != null) {
             this.nome = dados.nome();
         }
-        this.nome = dados.nome() ? dados.nome() : this.nome;
+        if (dados.endereco() != null) {
+            this.endereco.atualizarInformacoes(dados.endereco());
+        }
+//        this.nome= dados.nome() ? dados.nome() : this.nome;
+    }
+    public void excluir(){
+        this.ativo = false;
     }
 }

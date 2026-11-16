@@ -45,10 +45,11 @@ public class PessoaController {
         var pessoa = services.detalharPessoa(id);
         return ResponseEntity.ok(new DadosDetalhamentoPessoa(pessoa));
     }
-    @PutMapping()
-    public ResponseEntity atualizar(@RequestBody @Valid DadosAtualizarPessoas dados){
-        services.atualizarPessoa(dados);
-        return "asdad";
+    @PutMapping
+    public ResponseEntity<DadosDetalhamentoPessoa> atualizar(@RequestBody @Valid DadosAtualizarPessoas dados){
+        var pessoa = services.atualizarPessoa(dados);
+        return ResponseEntity.ok(new DadosDetalhamentoPessoa(pessoa));
     }
+
 
 }
