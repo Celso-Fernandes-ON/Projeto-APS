@@ -7,6 +7,6 @@ public record DadosDetalhamentoCategoria(
         String nome
 ) {
     public DadosDetalhamentoCategoria(Categoria categoria){
-        this(categoria.getId(), categoria.getName());
+        this(categoria.getId(), categoria.getNome());
     }
 }

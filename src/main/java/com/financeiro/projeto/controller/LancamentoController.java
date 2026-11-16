@@ -1,10 +1,10 @@
 package com.financeiro.projeto.controller;
 
-import com.financeiro.projeto.dto.DadosDetalhamentoLancamento;
+import com.financeiro.projeto.dto.*;
 import com.financeiro.projeto.services.LancamentoService;
 import jakarta.validation.Valid;
-import org.hibernate.query.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
@@ -18,12 +18,18 @@ public class LancamentoController {
     private LancamentoService service;
 
     @GetMapping
-    public ResponseEntity<Page<DadosDetalhamentoLancamento>> listar(@PageableDefault(size = 10, sort = "dataVencimento")Pageable paginacao){
+    public ResponseEntity<Page<DadosListagemLancamento>> listar(@PageableDefault(size = 10, sort = "dataVencimento")Pageable paginacao){
         return ResponseEntity.ok(service.listar(paginacao));
     }
     @PostMapping
-    public ResponseEntity<DadosDetalhamentoLancamento> cadastrar(@RequestBody @Valid DadosDetalhamentoLancamento dados){
+    public ResponseEntity<DadosDetalhamentoLancamento> cadastrar(@RequestBody @Valid DadosCadastroLancamento dados){
         var lancamento = service.cadastrar(dados);
         return ResponseEntity.status(HttpStatus.CREATED).body(new DadosDetalhamentoLancamento(lancamento));
     }
+    @GetMapping("/{id}")
+    public ResponseEntity detalhar(@PathVariable Long id){
+        var categoria = service.listar(id);
+        return ResponseEntity.ok(new DadosDetalhamentoCategoria(categoria));
+    }
+
 }
