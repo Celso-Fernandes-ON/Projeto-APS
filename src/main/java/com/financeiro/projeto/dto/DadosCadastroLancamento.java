@@ -19,10 +19,10 @@ public record DadosCadastroLancamento(
     @NotNull
     @Positive
     BigDecimal valor,
-    @NotNull
     String observacao,
     @NotNull
     TipoLancamento tipo,
+    @NotNull
     Long idPessoa,
     @NotNull
     Long idCategoria

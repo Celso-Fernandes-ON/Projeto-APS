@@ -1,9 +1,7 @@
 package com.financeiro.projeto.services;
 
-import com.financeiro.projeto.dto.DadosCadastroPessoa;
+import com.financeiro.projeto.dto.DadosCategoria;
 import com.financeiro.projeto.dto.DadosDetalhamentoCategoria;
-import com.financeiro.projeto.dto.DadosDetalhamentoPessoa;
-import com.financeiro.projeto.dto.DadosListagemPessoa;
 import com.financeiro.projeto.entities.Categoria;
 import com.financeiro.projeto.repositorio.CategoriaRepository;
 import jakarta.transaction.Transactional;
