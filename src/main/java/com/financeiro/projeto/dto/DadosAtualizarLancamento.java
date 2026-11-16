@@ -16,7 +16,7 @@ public record DadosAtualizarLancamento(
     LocalDate dataPagamento,
     @Positive
     BigDecimal valor,
-    String observacao,
+    String observacao
 
 ) {
 }
