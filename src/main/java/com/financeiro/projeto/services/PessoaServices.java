@@ -6,6 +6,7 @@ import com.financeiro.projeto.dto.DadosListagemPessoa;
 import com.financeiro.projeto.dto.DadosCadastroPessoa;
 import com.financeiro.projeto.entities.Pessoa;
 import com.financeiro.projeto.repositorio.PessoaRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,7 @@ public class PessoaServices {
 
     public Pessoa detalharPessoa(Long id) {
         return repository.getReferenceById(id);
+//        return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Pessoa não encontrada"));
     }
 
     @Transactional

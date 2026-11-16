@@ -3,7 +3,6 @@ package com.financeiro.projeto.services;
 import com.financeiro.projeto.dto.DadosAtualizarLancamento;
 import com.financeiro.projeto.dto.DadosCadastroLancamento;
 import com.financeiro.projeto.dto.DadosListagemLancamento;
-import com.financeiro.projeto.entities.Categoria;
 import com.financeiro.projeto.entities.Lancamento;
 import com.financeiro.projeto.repositorio.CategoriaRepository;
 import com.financeiro.projeto.repositorio.LancamentoRepository;
