@@ -34,7 +34,7 @@ public class LancamentoService {
     public Page<DadosListagemLancamento> listar(Pageable paginacao){
         return repository.findAll(paginacao).map(DadosListagemLancamento::new);
     }
-    public Categoria detalhar(Long id) {
+    public Lancamento detalhar(Long id) {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Lançamento não encontrado"));
     }
     @Transactional
