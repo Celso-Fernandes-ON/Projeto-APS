@@ -17,8 +17,8 @@ public class TratamentoDeErros {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<String> Trata404 (IllegalArgumentException e){
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+    public ResponseEntity<String> Trata400 (IllegalArgumentException e){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<List<DadosErroValidacao>> TrataValidacao (MethodArgumentNotValidException e){
