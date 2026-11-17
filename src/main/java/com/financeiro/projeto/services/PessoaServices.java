@@ -35,7 +35,7 @@ public class PessoaServices {
 
     @Transactional
     public Pessoa atualizarPessoa(@Valid DadosAtualizarPessoas dados) {
-        var pessoa = repository.getReferenceById(dados.id());
+        var pessoa = detalharPessoa(dados.id());
         pessoa.atualizarInformacoesPessoa(dados);
         return pessoa;
     }

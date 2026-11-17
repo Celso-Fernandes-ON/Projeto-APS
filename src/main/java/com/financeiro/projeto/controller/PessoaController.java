@@ -23,15 +23,12 @@ public class PessoaController {
     private PessoaServices services;
 
     @PostMapping
-    public ResponseEntity cadastrar(@RequestBody @Valid
-                                    DadosCadastroPessoa dados,
-                                    UriComponentsBuilder uriBuilder){
+    public ResponseEntity<DadosDetalhamentoPessoa> cadastrar(@RequestBody @Valid
+        DadosCadastroPessoa dados,
+        UriComponentsBuilder uriBuilder){
         var pessoa = services.cadastrar(dados);
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(new DadosDetalhamentoPessoa(pessoa));
-        //return ResponseEntity.ok().build();
-
+        var uri = uriBuilder.path("/pessoas/{id}").buildAndExpand(pessoa.getId()).toUri();
+        return ResponseEntity.created(uri).body(new DadosDetalhamentoPessoa(pessoa));
     }
     @GetMapping
     public ResponseEntity<Page<DadosListagemPessoa>> Listar(@PageableDefault(

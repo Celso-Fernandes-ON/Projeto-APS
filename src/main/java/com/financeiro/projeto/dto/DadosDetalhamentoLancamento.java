@@ -11,9 +11,27 @@ public record DadosDetalhamentoLancamento(
         String descricao,
         BigDecimal valor,
         TipoLancamento tipo,
-        LocalDate dataVencimento
+        LocalDate dataVencimento,
+        LocalDate dataPagamento,
+        String observacao,
+        Long idPessoa,
+        String nomePessoa,
+        Long idCategoria,
+        String nomeCategoria
+
 ) {
     public DadosDetalhamentoLancamento(Lancamento lancamento){
-        this(lancamento.getId(), lancamento.getDescricao(), lancamento.getValor(), lancamento.getTipo(), lancamento.getDataVencimento());
+        this(
+                lancamento.getId(),
+                lancamento.getDescricao(),
+                lancamento.getValor(),
+                lancamento.getTipo(),
+                lancamento.getDataVencimento(),
+                lancamento.getDataPagamento(),
+                lancamento.getObservacao(),
+                lancamento.getPessoa().getId(),
+                lancamento.getPessoa().getNome(),
+                lancamento.getCategoria().getId(),
+                lancamento.getCategoria().getNome());
     }
 }

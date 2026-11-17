@@ -10,6 +10,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("lancamento")
@@ -22,9 +23,11 @@ public class LancamentoController {
         return ResponseEntity.ok(service.listar(paginacao));
     }
     @PostMapping
-    public ResponseEntity<DadosDetalhamentoLancamento> cadastrar(@RequestBody @Valid DadosCadastroLancamento dados){
+    public ResponseEntity<DadosDetalhamentoLancamento> cadastrar(@RequestBody @Valid DadosCadastroLancamento dados, UriComponentsBuilder uriBuilder){
         var lancamento = service.cadastrar(dados);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new DadosDetalhamentoLancamento(lancamento));
+        var uri = uriBuilder.path("/{id}").buildAndExpand(lancamento.getId()).toUri();
+        return ResponseEntity.created(uri).body(new DadosDetalhamentoLancamento(lancamento));
+//        return ResponseEntity.status(HttpStatus.CREATED).body(new DadosDetalhamentoLancamento(lancamento));
     }
     @GetMapping("/{id}")
     public ResponseEntity<DadosDetalhamentoLancamento> detalhar(@PathVariable Long id){
