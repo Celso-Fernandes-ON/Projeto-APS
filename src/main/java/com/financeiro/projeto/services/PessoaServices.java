@@ -30,18 +30,17 @@ public class PessoaServices {
     }
 
     public Pessoa detalharPessoa(Long id) {
-        return repository.getReferenceById(id);
-//        return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Pessoa não encontrada"));
+        return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Pessoa não encontrada"));
     }
 
     @Transactional
     public Pessoa atualizarPessoa(@Valid DadosAtualizarPessoas dados) {
         var pessoa = repository.getReferenceById(dados.id());
-        pessoa.atualizarInformacoesPesso(dados);
+        pessoa.atualizarInformacoesPessoa(dados);
         return pessoa;
     }
     @Transactional
     public void excluir(Long id){
-        repository.getReferenceById(id).excluir();
+        detalharPessoa(id).excluir();
     }
 }

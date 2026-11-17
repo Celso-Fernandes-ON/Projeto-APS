@@ -32,7 +32,7 @@ public class Pessoa {
         this.endereco = new Endereco(dados.endereco());
     }
 
-    public void atualizarInformacoesPesso(DadosAtualizarPessoas dados) {
+    public void atualizarInformacoesPessoa(DadosAtualizarPessoas dados) {
         if (dados.nome() != null) {
             this.nome = dados.nome();
         }
