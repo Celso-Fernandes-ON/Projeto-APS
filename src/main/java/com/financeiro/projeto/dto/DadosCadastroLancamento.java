@@ -13,6 +13,8 @@ public record DadosCadastroLancamento(
     @NotBlank
     String descricao,
     @NotNull
+
+    @NotNull
     LocalDate dataVencimento,
     LocalDate dataPagamento,
 

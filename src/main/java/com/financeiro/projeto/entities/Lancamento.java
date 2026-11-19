@@ -23,6 +23,10 @@ public class Lancamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String descricao;
+
+    @Enumerated(EnumType.STRING)
+    private StatusLancamento status;
+
     private LocalDate dataVencimento;
     private LocalDate dataPagamento;
     private BigDecimal valor;
@@ -39,6 +43,7 @@ public class Lancamento {
 
     public Lancamento(DadosCadastroLancamento dados, Pessoa pessoa, Categoria categoria) {
         this.descricao = dados.descricao();
+        this.status = StatusLancamento.REALIZADO;
         this.dataVencimento = dados.dataVencimento();
         this.dataPagamento = dados.dataPagamento();
         this.valor = dados.valor();
@@ -53,5 +58,15 @@ public class Lancamento {
         if (dados.dataPagamento() != null) this.dataPagamento = dados.dataPagamento();
         if (dados.valor() != null) this.valor = dados.valor();
         if (dados.observacao() != null) this.observacao = dados.observacao();
+    }
+    public void cancelar() {
+        if (this.status == StatusLancamento.CANCELADO) {
+            throw new IllegalArgumentException("Lançamento já está cancelado");
+        }
+        this.status = StatusLancamento.CANCELADO;
+    }
+
+    public boolean estaCancelado() {
+        return this.status == StatusLancamento.CANCELADO;
     }
 }

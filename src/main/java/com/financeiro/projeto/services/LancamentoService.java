@@ -4,6 +4,7 @@ import com.financeiro.projeto.dto.DadosAtualizarLancamento;
 import com.financeiro.projeto.dto.DadosCadastroLancamento;
 import com.financeiro.projeto.dto.DadosListagemLancamento;
 import com.financeiro.projeto.entities.Lancamento;
+import com.financeiro.projeto.entities.StatusLancamento;
 import com.financeiro.projeto.repositorio.CategoriaRepository;
 import com.financeiro.projeto.repositorio.LancamentoRepository;
 import com.financeiro.projeto.repositorio.PessoaRepository;
@@ -30,8 +31,8 @@ public class LancamentoService {
         var categoria = categoriaRepository.findById(dados.idCategoria()).orElseThrow(() -> new EntityNotFoundException("Categoria não encontrada"));
         return repository.save(new Lancamento(dados, pessoa, categoria));
     }
-    public Page<DadosListagemLancamento> listar(Pageable paginacao){
-        return repository.findAll(paginacao).map(DadosListagemLancamento::new);
+    public Page<DadosListagemLancamento> listar(StatusLancamento status, Pageable paginacao){
+        return repository.findAllByStatus(status, paginacao).map(DadosListagemLancamento::new);
     }
     public Lancamento detalhar(Long id) {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Lançamento não encontrado"));
@@ -39,13 +40,16 @@ public class LancamentoService {
     @Transactional
     public Lancamento atualizar(DadosAtualizarLancamento dados){
         var lancamento = detalhar(dados.id());
+        if(lancamento.estaCancelado()){
+            throw new IllegalArgumentException("Lançamento cancelado não pode ser alterado");
+        }
+
         lancamento.atualizarInformacoes(dados);
         return lancamento;
     }
     @Transactional
     public void excluir(Long id){
-        var lancamento = detalhar(id);
-        repository.delete(lancamento);
+        detalhar(id).cancelar();
     }
 
 }

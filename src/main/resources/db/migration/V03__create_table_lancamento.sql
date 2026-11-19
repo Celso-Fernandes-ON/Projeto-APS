@@ -1,6 +1,7 @@
 CREATE TABLE lancamento (
     id BIGSERIAL PRIMARY KEY,
     descricao VARCHAR(100) NOT NULL,
+    status varchar(20)NOT NULL,
     data_vencimento DATE NOT NULL,
     data_pagamento DATE,
     valor NUMERIC(10,2) NOT NULL,

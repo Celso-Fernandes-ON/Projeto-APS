@@ -5,10 +5,11 @@ import com.financeiro.projeto.entities.Pessoa;
 public record DadosDetalhamentoPessoa(
 
         Long id,
-        String nome
+        String nome,
+        Boolean ativo
         ) {
 
     public DadosDetalhamentoPessoa(Pessoa pessoa) {
-        this(pessoa.getId(),pessoa.getNome());
+        this(pessoa.getId(),pessoa.getNome(),pessoa.getAtivo());
     }
 }

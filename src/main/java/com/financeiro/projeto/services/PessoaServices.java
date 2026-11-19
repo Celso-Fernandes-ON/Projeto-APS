@@ -32,10 +32,15 @@ public class PessoaServices {
     public Pessoa detalharPessoa(Long id) {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Pessoa não encontrada"));
     }
+    @Transactional
+    public void reativarPessoa(Long id){
+        detalharPessoa(id).reativar();
+    }
 
     @Transactional
     public Pessoa atualizarPessoa(@Valid DadosAtualizarPessoas dados) {
         var pessoa = detalharPessoa(dados.id());
+        if (!pessoa.getAtivo()) throw new IllegalArgumentException("Pessoa inativa não pode ser alterada");
         pessoa.atualizarInformacoesPessoa(dados);
         return pessoa;
     }

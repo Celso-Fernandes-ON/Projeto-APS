@@ -25,7 +25,6 @@ public class Pessoa {
 
     private Boolean ativo;
 
-
     public Pessoa(DadosCadastroPessoa dados) {
         this.ativo = true;
         this.nome = dados.nome();
@@ -43,5 +42,8 @@ public class Pessoa {
     }
     public void excluir(){
         this.ativo = false;
+    }
+    public void reativar(){
+        this.ativo = true;
     }
 }
