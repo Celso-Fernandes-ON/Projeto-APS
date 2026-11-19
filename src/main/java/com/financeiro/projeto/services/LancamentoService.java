@@ -32,7 +32,10 @@ public class LancamentoService {
         return repository.save(new Lancamento(dados, pessoa, categoria));
     }
     public Page<DadosListagemLancamento> listar(StatusLancamento status, Pageable paginacao){
-        return repository.findAllByStatus(status, paginacao).map(DadosListagemLancamento::new);
+        var page = (status == null)
+                ? repository.findAllByStatusNot(StatusLancamento.CANCELADO, paginacao)
+                : repository.findAllByStatus(status, paginacao);
+        return page.map(DadosListagemLancamento::new);
     }
     public Lancamento detalhar(Long id) {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Lançamento não encontrado"));

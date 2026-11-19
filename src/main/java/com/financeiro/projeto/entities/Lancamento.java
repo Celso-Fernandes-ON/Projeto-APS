@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Table(name = "lancamento")
 @Entity(name = "Lancamento")
@@ -43,7 +42,7 @@ public class Lancamento {
 
     public Lancamento(DadosCadastroLancamento dados, Pessoa pessoa, Categoria categoria) {
         this.descricao = dados.descricao();
-        this.status = StatusLancamento.REALIZADO;
+        this.status = dados.dataPagamento() != null ? StatusLancamento.REALIZADO : StatusLancamento.PENDENTE;
         this.dataVencimento = dados.dataVencimento();
         this.dataPagamento = dados.dataPagamento();
         this.valor = dados.valor();
@@ -55,7 +54,10 @@ public class Lancamento {
     public void atualizarInformacoes(DadosAtualizarLancamento dados){
         if (dados.descricao() != null) this.descricao = dados.descricao();
         if (dados.dataVencimento() != null) this.dataVencimento = dados.dataVencimento();
-        if (dados.dataPagamento() != null) this.dataPagamento = dados.dataPagamento();
+        if (dados.dataPagamento() != null) {
+            this.dataPagamento = dados.dataPagamento();
+            if (this.status == StatusLancamento.PENDENTE) this.status = StatusLancamento.REALIZADO;
+        }
         if (dados.valor() != null) this.valor = dados.valor();
         if (dados.observacao() != null) this.observacao = dados.observacao();
     }

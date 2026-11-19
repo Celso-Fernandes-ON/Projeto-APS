@@ -12,7 +12,6 @@ import java.time.LocalDate;
 public record DadosCadastroLancamento(
     @NotBlank
     String descricao,
-    @NotNull
 
     @NotNull
     LocalDate dataVencimento,

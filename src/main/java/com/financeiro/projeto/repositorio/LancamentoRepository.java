@@ -8,4 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface LancamentoRepository extends JpaRepository<Lancamento, Long> {
     Page<Lancamento> findAllByStatus(StatusLancamento status, Pageable paginacao);
+    Page<Lancamento> findAllByStatusNot(StatusLancamento status, Pageable paginacao);
 }

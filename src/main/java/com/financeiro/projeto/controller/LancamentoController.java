@@ -20,14 +20,14 @@ public class LancamentoController {
 
     @GetMapping
     public ResponseEntity<Page<DadosListagemLancamento>> listar(
-            @RequestParam(defaultValue = "REALIZADO") StatusLancamento status,
+            @RequestParam(required = false) StatusLancamento status,
             @PageableDefault(size = 10, sort = "dataVencimento")Pageable paginacao){
         return ResponseEntity.ok(service.listar(status, paginacao));
     }
     @PostMapping
     public ResponseEntity<DadosDetalhamentoLancamento> cadastrar(@RequestBody @Valid DadosCadastroLancamento dados, UriComponentsBuilder uriBuilder){
         var lancamento = service.cadastrar(dados);
-        var uri = uriBuilder.path("/{id}").buildAndExpand(lancamento.getId()).toUri();
+        var uri = uriBuilder.path("lancamento/{id}").buildAndExpand(lancamento.getId()).toUri();
         return ResponseEntity.created(uri).body(new DadosDetalhamentoLancamento(lancamento));
     }
     @GetMapping("/{id}")

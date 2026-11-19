@@ -1,3 +1,3 @@
 package com.financeiro.projeto.entities;
 
-public enum StatusLancamento { REALIZADO, CANCELADO }
+public enum StatusLancamento { PENDENTE, REALIZADO, CANCELADO }
