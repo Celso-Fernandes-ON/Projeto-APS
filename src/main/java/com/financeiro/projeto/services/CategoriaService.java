@@ -4,7 +4,9 @@ import com.financeiro.projeto.dto.DadosCategoria;
 import com.financeiro.projeto.dto.DadosDetalhamentoCategoria;
 import com.financeiro.projeto.entities.Categoria;
 import com.financeiro.projeto.repositorio.CategoriaRepository;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,9 +22,14 @@ public class CategoriaService {
         var categoria = categoriaRepository.save(new Categoria(dados.nome()));
         return categoria;
     }
-
     public Page<DadosDetalhamentoCategoria> listar(Pageable paginacao){
         return categoriaRepository.findAll(paginacao).map(DadosDetalhamentoCategoria::new);
+    }
+    public Categoria detalharCategoria(Long id){
+        return categoriaRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Categoria não encontrada"));
+    }
+    public Categoria atualizar(@Valid DadosCategoria dados){
+        var categoria = categoriaRepository;
     }
 
 }

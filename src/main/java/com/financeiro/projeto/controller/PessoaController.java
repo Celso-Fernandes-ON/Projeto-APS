@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -38,7 +37,7 @@ public class PessoaController {
         return ResponseEntity.ok(page);
     }
     @GetMapping("/{id}")
-    public ResponseEntity detalhar(@PathVariable Long id){
+    public ResponseEntity<DadosDetalhamentoPessoa> detalhar(@PathVariable Long id){
         var pessoa = services.detalharPessoa(id);
         return ResponseEntity.ok(new DadosDetalhamentoPessoa(pessoa));
     }
@@ -58,6 +57,4 @@ public class PessoaController {
         services.excluir(id);
         return ResponseEntity.noContent().build();
     }
-
-
 }

@@ -38,7 +38,6 @@ public class Pessoa {
         if (dados.endereco() != null) {
             this.endereco.atualizarInformacoes(dados.endereco());
         }
-//        this.nome= dados.nome() ? dados.nome() : this.nome;
     }
     public void excluir(){
         this.ativo = false;

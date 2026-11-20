@@ -27,7 +27,7 @@ public class LancamentoController {
     @PostMapping
     public ResponseEntity<DadosDetalhamentoLancamento> cadastrar(@RequestBody @Valid DadosCadastroLancamento dados, UriComponentsBuilder uriBuilder){
         var lancamento = service.cadastrar(dados);
-        var uri = uriBuilder.path("lancamento/{id}").buildAndExpand(lancamento.getId()).toUri();
+        var uri = uriBuilder.path("/lancamento/{id}").buildAndExpand(lancamento.getId()).toUri();
         return ResponseEntity.created(uri).body(new DadosDetalhamentoLancamento(lancamento));
     }
     @GetMapping("/{id}")

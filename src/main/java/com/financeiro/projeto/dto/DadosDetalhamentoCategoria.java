@@ -4,9 +4,10 @@ import com.financeiro.projeto.entities.Categoria;
 
 public record DadosDetalhamentoCategoria(
         Long id,
-        String nome
+        String nome,
+        Boolean ativo
 ) {
     public DadosDetalhamentoCategoria(Categoria categoria){
-        this(categoria.getId(), categoria.getNome());
+        this(categoria.getId(), categoria.getNome(), categoria.getAtivo());
     }
 }
