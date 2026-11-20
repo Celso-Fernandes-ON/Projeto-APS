@@ -29,6 +29,7 @@ public class LancamentoService {
         var pessoa = pessoaRepository.findById(dados.idPessoa()).orElseThrow(() -> new EntityNotFoundException("Pessoa não encontrada"));
         if (!pessoa.getAtivo()) throw new IllegalArgumentException("Pessoa inativa");
         var categoria = categoriaRepository.findById(dados.idCategoria()).orElseThrow(() -> new EntityNotFoundException("Categoria não encontrada"));
+        if (!categoria.getAtivo()) throw new IllegalArgumentException("Categoria inativa");
         return repository.save(new Lancamento(dados, pessoa, categoria));
     }
     public Page<DadosListagemLancamento> listar(StatusLancamento status, Pageable paginacao){

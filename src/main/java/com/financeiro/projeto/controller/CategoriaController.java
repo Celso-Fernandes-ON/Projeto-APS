@@ -3,7 +3,6 @@ package com.financeiro.projeto.controller;
 
 import com.financeiro.projeto.dto.DadosCategoria;
 import com.financeiro.projeto.dto.DadosDetalhamentoCategoria;
-import com.financeiro.projeto.dto.DadosDetalhamentoPessoa;
 import com.financeiro.projeto.services.CategoriaService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,9 +36,19 @@ public class CategoriaController {
         return ResponseEntity.ok(new DadosDetalhamentoCategoria(categoria));
     }
     @PutMapping("/{id}")
-    public ResponseEntity atualizar(@RequestBody @Valid DadosCategoria dados){
-        var catregoria = service.
-        return ResponseEntity.ok(new DadosCategoria(catregoria));
+    public ResponseEntity atualizar(@PathVariable Long id, @RequestBody @Valid DadosCategoria dados){
+        var catregoria = service.atualizar(id, dados);
+        return ResponseEntity.ok(new DadosDetalhamentoCategoria(catregoria));
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> desativar(@PathVariable Long id){
+        service.desativar(id);
+        return ResponseEntity.noContent().build();
     }
 
+    @DeleteMapping("/reativar/{id}")
+    public ResponseEntity<Void> reativar(@PathVariable Long id){
+        service.reativar(id);
+        return ResponseEntity.noContent().build();
+    }
 }

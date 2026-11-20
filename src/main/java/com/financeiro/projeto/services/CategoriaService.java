@@ -23,13 +23,25 @@ public class CategoriaService {
         return categoria;
     }
     public Page<DadosDetalhamentoCategoria> listar(Pageable paginacao){
-        return categoriaRepository.findAll(paginacao).map(DadosDetalhamentoCategoria::new);
+        return categoriaRepository.findAllByAtivoTrue(paginacao).map(DadosDetalhamentoCategoria::new);
     }
     public Categoria detalharCategoria(Long id){
         return categoriaRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Categoria não encontrada"));
     }
-    public Categoria atualizar(@Valid DadosCategoria dados){
-        var categoria = categoriaRepository;
+    @Transactional
+    public Categoria atualizar(Long id, DadosCategoria dados){
+        var categoria = detalharCategoria(id);
+        if (!categoria.getAtivo()) throw new IllegalArgumentException("Categoria inativa não pode ser alterada");
+        categoria.atualizar(dados);
+        return categoria;
+    }
+    @Transactional
+    public void desativar(Long id){
+        detalharCategoria(id).desativar();
+    }
+    @Transactional
+    public void reativar(Long id){
+        detalharCategoria(id).reativar();
     }
 
 }

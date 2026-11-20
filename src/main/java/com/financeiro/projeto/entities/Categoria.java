@@ -2,6 +2,7 @@ package com.financeiro.projeto.entities;
 
 import com.financeiro.projeto.dto.DadosCategoria;
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -20,10 +21,11 @@ public class Categoria {
     private String nome;
     private Boolean ativo;
 
-    public Categoria(String nome, Boolean ativo) {
-        this.ativo = true;
+    public Categoria(String nome) {
         this.nome = nome;
+        this.ativo = true;
     }
+    @Transactional
     public void atualizar(DadosCategoria dados) {
         this.nome = dados.nome();
     }

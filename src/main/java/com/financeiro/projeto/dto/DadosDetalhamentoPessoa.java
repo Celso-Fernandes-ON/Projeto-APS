@@ -1,6 +1,5 @@
 package com.financeiro.projeto.dto;
 
-import com.financeiro.projeto.entities.Endereco;
 import com.financeiro.projeto.entities.Pessoa;
 
 public record DadosDetalhamentoPessoa(
@@ -8,27 +7,23 @@ public record DadosDetalhamentoPessoa(
         Long id,
         String nome,
         Boolean ativo,
-        String logradouro,
-        String bairro,
-        String cep,
-        String numero,
-        String complemento,
-        String cidade,
-        String uf
+        DadosEndereco endereco
         ) {
 
-    public DadosDetalhamentoPessoa(Pessoa pessoa, DadosEndereco endereco) {
+    public DadosDetalhamentoPessoa(Pessoa pessoa) {
         this(
                 pessoa.getId(),
                 pessoa.getNome(),
                 pessoa.getAtivo(),
-                pessoa.getEndereco().getBairro(),
-                pessoa.getEndereco().getUf(),
-                pessoa.getEndereco().getCidade(),
-                pessoa.getEndereco().getNumero(),
-                pessoa.getEndereco().getCep(),
-                pessoa.getEndereco().getLogradouro(),
-                pessoa.getEndereco().getComplemento()
+                new DadosEndereco(
+                    pessoa.getEndereco().getLogradouro(),
+                    pessoa.getEndereco().getNumero(),
+                    pessoa.getEndereco().getComplemento(),
+                    pessoa.getEndereco().getBairro(),
+                    pessoa.getEndereco().getCep(),
+                    pessoa.getEndereco().getCidade(),
+                    pessoa.getEndereco().getUf()
+                )
         );
     }
 }
