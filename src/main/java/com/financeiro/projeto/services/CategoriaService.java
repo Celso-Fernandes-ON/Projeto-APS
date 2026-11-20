@@ -6,7 +6,6 @@ import com.financeiro.projeto.entities.Categoria;
 import com.financeiro.projeto.repositorio.CategoriaRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

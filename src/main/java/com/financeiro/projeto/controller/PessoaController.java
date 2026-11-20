@@ -30,10 +30,10 @@ public class PessoaController {
         return ResponseEntity.created(uri).body(new DadosDetalhamentoPessoa(pessoa));
     }
     @GetMapping
-    public ResponseEntity<Page<DadosListagemPessoa>> Listar(@PageableDefault(
-            size = 10, sort = {"nome"}) Pageable peginacao){
+    public ResponseEntity<Page<DadosListagemPessoa>> listar(@PageableDefault(
+            size = 10, sort = {"nome"}) Pageable paginacao){
         Page<DadosListagemPessoa> page =
-        services.listarPessoa(peginacao);
+        services.listarPessoa(paginacao);
         return ResponseEntity.ok(page);
     }
     @GetMapping("/{id}")

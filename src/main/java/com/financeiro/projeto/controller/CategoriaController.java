@@ -27,18 +27,18 @@ public class CategoriaController {
     }
     @GetMapping
     public ResponseEntity<Page<DadosDetalhamentoCategoria>> listar(
-            @PageableDefault(size = 10, sort = "nome")Pageable papaginacao){
-        return ResponseEntity.ok(service.listar(papaginacao));
+            @PageableDefault(size = 10, sort = "nome")Pageable paginacao){
+        return ResponseEntity.ok(service.listar(paginacao));
     }
     @GetMapping("/{id}")
-    public ResponseEntity detalhar(@PathVariable Long id){
+    public ResponseEntity<DadosDetalhamentoCategoria> detalhar(@PathVariable Long id){
         var categoria = service.detalharCategoria(id);
         return ResponseEntity.ok(new DadosDetalhamentoCategoria(categoria));
     }
     @PutMapping("/{id}")
-    public ResponseEntity atualizar(@PathVariable Long id, @RequestBody @Valid DadosCategoria dados){
-        var catregoria = service.atualizar(id, dados);
-        return ResponseEntity.ok(new DadosDetalhamentoCategoria(catregoria));
+    public ResponseEntity<DadosDetalhamentoCategoria> atualizar(@PathVariable Long id, @RequestBody @Valid DadosCategoria dados){
+        var categoria = service.atualizar(id, dados);
+        return ResponseEntity.ok(new DadosDetalhamentoCategoria(categoria));
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> desativar(@PathVariable Long id){
@@ -46,7 +46,7 @@ public class CategoriaController {
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/reativar/{id}")
+    @PatchMapping("/reativar/{id}")
     public ResponseEntity<Void> reativar(@PathVariable Long id){
         service.reativar(id);
         return ResponseEntity.noContent().build();
