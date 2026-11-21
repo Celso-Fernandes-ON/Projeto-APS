@@ -21,8 +21,9 @@ public class CategoriaService {
         var categoria = categoriaRepository.save(new Categoria(dados.nome()));
         return categoria;
     }
-    public Page<DadosDetalhamentoCategoria> listar(Pageable paginacao){
-        return categoriaRepository.findAllByAtivoTrue(paginacao).map(DadosDetalhamentoCategoria::new);
+    public Page<DadosDetalhamentoCategoria> listar(Boolean ativo, Pageable paginacao){
+        boolean filtro = (ativo == null) || ativo;
+        return categoriaRepository.findAllByAtivo(filtro, paginacao).map(DadosDetalhamentoCategoria::new);
     }
     public Categoria detalharCategoria(Long id){
         return categoriaRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Categoria não encontrada"));

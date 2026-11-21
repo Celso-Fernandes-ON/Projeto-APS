@@ -27,8 +27,9 @@ public class CategoriaController {
     }
     @GetMapping
     public ResponseEntity<Page<DadosDetalhamentoCategoria>> listar(
+            @RequestParam(required = false) Boolean ativo,
             @PageableDefault(size = 10, sort = "nome")Pageable paginacao){
-        return ResponseEntity.ok(service.listar(paginacao));
+        return ResponseEntity.ok(service.listar(ativo, paginacao));
     }
     @GetMapping("/{id}")
     public ResponseEntity<DadosDetalhamentoCategoria> detalhar(@PathVariable Long id){

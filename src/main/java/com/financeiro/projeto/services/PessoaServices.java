@@ -25,8 +25,9 @@ public class PessoaServices {
         var pessoa = repository.save(new Pessoa(dados));
         return pessoa;
     }
-    public Page<DadosListagemPessoa> listarPessoa(Pageable paginacao){
-        return repository.findAllByAtivoTrue(paginacao).map(DadosListagemPessoa::new);
+    public Page<DadosListagemPessoa> listarPessoa(Boolean ativo, Pageable paginacao){
+        boolean filtro = (ativo == null) || ativo;
+        return repository.findAllByAtivo(filtro, paginacao).map(DadosListagemPessoa::new);
     }
 
     public Pessoa detalharPessoa(Long id) {

@@ -40,9 +40,15 @@ public class Pessoa {
         }
     }
     public void excluir(){
+        if (!this.getAtivo()){
+            throw new IllegalArgumentException("Pessoa já está inativa");
+        }
         this.ativo = false;
     }
     public void reativar(){
+        if (this.getAtivo()){
+            throw new IllegalArgumentException("Pessoa já está ativa");
+        }
         this.ativo = true;
     }
 }

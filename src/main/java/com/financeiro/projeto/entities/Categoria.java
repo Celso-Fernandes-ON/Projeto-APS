@@ -28,9 +28,15 @@ public class Categoria {
         this.nome = dados.nome();
     }
     public void desativar(){
+        if (!this.getAtivo()){
+            throw new IllegalArgumentException("Categoria já está desativada");
+        }
         this.ativo = false;
     }
     public void reativar(){
+        if (this.getAtivo()){
+            throw new IllegalArgumentException("Categoria está ativada");
+        }
         this.ativo = true;
     }
 }
