@@ -186,7 +186,7 @@ collection:
                 store: true
               rebuildPath: true
           - url: "{{ _.base_url }}/lancamento/9999"
-            name: "4.5 Lançamento inexistente"
+            name: "4.5 Lançamento inexistente "
             meta:
               id: req_94792f815b2a42efa39710e5e1ad8a87
               created: 1795290000000
@@ -336,7 +336,7 @@ collection:
                   "descricao": "Salário",
                   "dataVencimento": "2026-12-01",
                   "valor": 3000.0,
-                  "observacao": "Compra do mês",
+                  "observacao": "Pagamento de dezembro",
                   "tipo": "RECEITA",
                   "dataPagamento": "2026-12-05",
                   "idPessoa": 1,

@@ -15,6 +15,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+
 @Service
 public class LancamentoService {
     @Autowired
@@ -24,12 +26,19 @@ public class LancamentoService {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
+    private void validarDatas(LocalDate vencimento, LocalDate pagamento) {
+        if (pagamento != null && pagamento.isBefore(vencimento)) {
+            throw new IllegalArgumentException(
+                    "Data de pagamento não pode ser anterior à data de vencimento");
+        }
+    }
     @Transactional
     public Lancamento cadastrar(DadosCadastroLancamento dados){
         var pessoa = pessoaRepository.findById(dados.idPessoa()).orElseThrow(() -> new EntityNotFoundException("Pessoa não encontrada"));
         if (!pessoa.getAtivo()) throw new IllegalArgumentException("Pessoa inativa");
         var categoria = categoriaRepository.findById(dados.idCategoria()).orElseThrow(() -> new EntityNotFoundException("Categoria não encontrada"));
         if (!categoria.getAtivo()) throw new IllegalArgumentException("Categoria inativa");
+        validarDatas(dados.dataVencimento(), dados.dataPagamento());
         return repository.save(new Lancamento(dados, pessoa, categoria));
     }
     public Page<DadosListagemLancamento> listar(StatusLancamento status, Pageable paginacao){
@@ -44,14 +53,13 @@ public class LancamentoService {
     @Transactional
     public Lancamento atualizar(DadosAtualizarLancamento dados){
         var lancamento = detalhar(dados.id());
-        if (dados.dataPagamento() != null){
-            if (dados.dataPagamento().isBefore(lancamento.getDataVencimento() )){
-                throw new IllegalArgumentException("Data de pagamento não pode ser realizado antes do lançamento");
-            }
-        }
         if(lancamento.estaCancelado()){
             throw new IllegalArgumentException("Lançamento cancelado não pode ser alterado");
         }
+        var vencimento = dados.dataVencimento() != null ? dados.dataVencimento() : lancamento.getDataVencimento();
+        var pagamento  = dados.dataPagamento()  != null ? dados.dataPagamento()  : lancamento.getDataPagamento();
+
+        validarDatas(vencimento, pagamento);
 
         lancamento.atualizarInformacoes(dados);
         return lancamento;
