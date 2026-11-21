@@ -47,7 +47,7 @@ public class CategoriaController {
         return ResponseEntity.noContent().build();
     }
 
-    @PatchMapping("/reativar/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<Void> reativar(@PathVariable Long id){
         service.reativar(id);
         return ResponseEntity.noContent().build();

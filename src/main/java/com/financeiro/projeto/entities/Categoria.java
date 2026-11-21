@@ -35,7 +35,7 @@ public class Categoria {
     }
     public void reativar(){
         if (this.getAtivo()){
-            throw new IllegalArgumentException("Categoria está ativada");
+            throw new IllegalArgumentException("Categoria já está ativada");
         }
         this.ativo = true;
     }

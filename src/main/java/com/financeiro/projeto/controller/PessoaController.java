@@ -46,7 +46,7 @@ public class PessoaController {
         var pessoa = services.atualizarPessoa(dados);
         return ResponseEntity.ok(new DadosDetalhamentoPessoa(pessoa));
     }
-    @PatchMapping("/reativar/{id}")
+    @PatchMapping("/{id}")
     public ResponseEntity<Void> reativar(@PathVariable Long id){
         services.reativarPessoa(id);
         return ResponseEntity.noContent().build();
