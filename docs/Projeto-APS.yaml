@@ -1,6 +1,6 @@
 type: collection.insomnia.rest/5.0
 schema_version: "5.1"
-name: Scratch Pad
+name: Projeto APS
 meta:
   id: wrk_scratchpad
   created: 1709426242780
@@ -28,9 +28,9 @@ collection:
             meta:
               id: req_2eb02794c4224a41813f62a105cc90de
               created: 1795290000000
-              modified: 1795227140387
+              modified: 1795234996217
               isPrivate: false
-              description: "Esperado: 400 TIPO_INVALIDO listando [RECEITA, DESPESA]."
+              description: "Esperado: 400 TIPO_INVALIDO."
               sortKey: 1795290023000
             method: POST
             body:
@@ -94,9 +94,9 @@ collection:
             meta:
               id: req_45315a13a10c47d2b20e3a13ceb762b4
               created: 1795290000000
-              modified: 1795227006186
+              modified: 1795235026299
               isPrivate: false
-              description: "Esperado: 400 com lista campo/mensagem (falta o nome)."
+              description: "Esperado: 400 falta o nome."
               sortKey: 1795290022000
             method: POST
             body:
@@ -129,9 +129,9 @@ collection:
             meta:
               id: req_74cc7e9fb0d646cbb7587b11772ca382
               created: 1795290000000
-              modified: 1795227174788
+              modified: 1795234978138
               isPrivate: false
-              description: "Esperado: 400 JSON_INVALIDO (falta fechar a chave)."
+              description: "Esperado: 400 JSON_INVALIDO."
               sortKey: 1795290025000
             method: POST
             body:
@@ -157,10 +157,9 @@ collection:
             meta:
               id: req_8f810376b6154e6caf117e845610f48a
               created: 1795290000000
-              modified: 1795227261495
+              modified: 1795234961866
               isPrivate: false
-              description: "Esperado: 400 'Pessoa inativa'. Rode antes o 1.5 (Excluir pessoa)
-                e depois o 1.6 (Reativar)."
+              description: "Esperado: 400 'Pessoa inativa'."
               sortKey: 1795290027000
             method: POST
             body:
@@ -187,7 +186,7 @@ collection:
                 store: true
               rebuildPath: true
           - url: "{{ _.base_url }}/lancamento/9999"
-            name: "4.5 Lançamento inexistente "
+            name: "4.5 Lançamento inexistente"
             meta:
               id: req_94792f815b2a42efa39710e5e1ad8a87
               created: 1795290000000
@@ -213,14 +212,13 @@ collection:
           description: ""
         children:
           - url: "{{ _.base_url }}/lancamento?status=REALIZADO"
-            name: 3.4 Listar por status (REALIZADO)
+            name: 3.5 Listar por status (REALIZADO)
             meta:
               id: req_c4350ca4fa7342c4aedef0ed545cc0cb
               created: 1795226818787
-              modified: 1795226861778
+              modified: 1795235139204
               isPrivate: false
-              description: "Esperado: 200. Mude a variável status: PENDENTE, REALIZADO ou
-                CANCELADO."
+              description: "Esperado: 200. status: REALIZADO."
               sortKey: 1795290017500
             method: GET
             settings:
@@ -232,14 +230,13 @@ collection:
                 store: true
               rebuildPath: true
           - url: "{{ _.base_url }}/lancamento?status=CANCELADO"
-            name: 3.4 Listar por status (CANCELADO)
+            name: 3.6 Listar por status (CANCELADO)
             meta:
               id: req_095a6aa2c7284d3ca99025e011e5ec0a
               created: 1795226821570
-              modified: 1795226881069
+              modified: 1795235125321
               isPrivate: false
-              description: "Esperado: 200. Mude a variável status: PENDENTE, REALIZADO ou
-                CANCELADO."
+              description: "Esperado: 200. status: CANCELADO."
               sortKey: 1795290017750
             method: GET
             settings:
@@ -255,10 +252,9 @@ collection:
             meta:
               id: req_549bc7d952b1488a8cf163daa55ee68d
               created: 1795290000000
-              modified: 1795226833374
+              modified: 1795235150540
               isPrivate: false
-              description: "Esperado: 200. Mude a variável status: PENDENTE, REALIZADO ou
-                CANCELADO."
+              description: "Esperado: 200. status: PENDENTE."
               sortKey: 1795290017000
             method: GET
             settings:
@@ -270,14 +266,13 @@ collection:
                 store: true
               rebuildPath: true
           - url: "{{ _.base_url }}/lancamento/1"
-            name: 3.5 Buscar lançamento por id
+            name: 3.7 Buscar lançamento por id
             meta:
               id: req_5699166b1a2d4ea397b580ca3f43ee38
               created: 1795290000000
-              modified: 1795226757919
+              modified: 1795234638797
               isPrivate: false
-              description: "Esperado: 200 com pessoa e categoria. Id vem da variável
-                lancamento_id."
+              description: "Esperado: 200 com pessoa e categoria."
               sortKey: 1795290018000
             method: GET
             settings:
@@ -307,14 +302,13 @@ collection:
                 store: true
               rebuildPath: true
           - url: "{{ _.base_url }}/lancamento/2"
-            name: 3.7 Cancelar lançamento
+            name: 3.9 Cancelar lançamento
             meta:
               id: req_938014e5450b4b82a04ccaf4d4cfbb12
               created: 1795290000000
-              modified: 1795226919269
+              modified: 1795235066727
               isPrivate: false
-              description: "Esperado: 204. Depois GET por id mostra CANCELADO, e um novo
-                PUT/DELETE nele dá 400."
+              description: "Esperado: 204."
               sortKey: 1795290020000
             method: DELETE
             settings:
@@ -330,7 +324,7 @@ collection:
             meta:
               id: req_be3ec7b08ea64908b3162ab7a1ae3b33
               created: 1795290000000
-              modified: 1795226784388
+              modified: 1795234151599
               isPrivate: false
               description: "Esperado: 201, status REALIZADO."
               sortKey: 1795290015000
@@ -360,14 +354,13 @@ collection:
                 store: true
               rebuildPath: true
           - url: "{{ _.base_url }}/lancamento"
-            name: 3.6 Informar pagamento (PENDENTE vira REALIZADO)
+            name: 3.8 Informar pagamento (PENDENTE vira REALIZADO)
             meta:
               id: req_d467a66c952945198cc0792d121e1729
               created: 1795290000000
-              modified: 1795226968984
+              modified: 1795235082379
               isPrivate: false
-              description: "Esperado: 200, status REALIZADO. Ajuste o id no corpo (um
-                lançamento pendente)."
+              description: "Esperado: 200, status REALIZADO."
               sortKey: 1795290019000
             method: PUT
             body:
@@ -393,10 +386,9 @@ collection:
             meta:
               id: req_f77e57963ebf4e2d8f66ef52e53ef970
               created: 1795290000000
-              modified: 1795226775455
+              modified: 1795235169949
               isPrivate: false
-              description: "Esperado: 201, status PENDENTE. Troque descrição, valor, tipo
-                (RECEITA/DESPESA), ids."
+              description: "Esperado: 201, status PENDENTE."
               sortKey: 1795290014000
             method: POST
             body:
@@ -431,11 +423,11 @@ collection:
           description: ""
         children:
           - url: "{{ _.base_url }}/categoria/1"
-            name: 2.2 Listar categorias (único)
+            name: 2.4 Buscar categoria por id
             meta:
               id: req_911fbeb80133437ca9f29584d8636482
               created: 1795225791516
-              modified: 1795226799412
+              modified: 1795235270009
               isPrivate: false
               description: "Esperado: 200."
               sortKey: 1795290009500
@@ -449,13 +441,13 @@ collection:
                 store: true
               rebuildPath: true
           - url: "{{ _.base_url }}/categoria?ativo=false"
-            name: 2.2 Listar categorias (inativas)
+            name: 2.3 Listar categorias (inativas)
             meta:
               id: req_3e672edd69734700b62f5b273dd525d0
               created: 1795231407101
-              modified: 1795231423419
+              modified: 1795235246089
               isPrivate: false
-              description: "Esperado: 200."
+              description: "Esperado: 200. página com as categorias inativas."
               sortKey: 1795290009250
             method: GET
             settings:
@@ -467,13 +459,13 @@ collection:
                 store: true
               rebuildPath: true
           - url: "{{ _.base_url }}/categoria/2"
-            name: 2.3 Atualizar categoria
+            name: 2.5 Atualizar categoria
             meta:
               id: req_8fa7f727eec2434c982df1cb8d76fd3e
               created: 1795290000000
-              modified: 1795226790404
+              modified: 1795235209266
               isPrivate: false
-              description: "Esperado: 200. O id vai na URL, não no corpo."
+              description: "Esperado: 200."
               sortKey: 1795290010000
             method: PUT
             body:
@@ -498,9 +490,9 @@ collection:
             meta:
               id: req_9049f52747fb42d0ae48c4ab36d52c15
               created: 1795290000000
-              modified: 1795231413853
+              modified: 1795235235330
               isPrivate: false
-              description: "Esperado: 200."
+              description: "Esperado: 200. página com as categorias ativas."
               sortKey: 1795290009000
             method: GET
             settings:
@@ -539,13 +531,13 @@ collection:
                 store: true
               rebuildPath: true
           - url: "{{ _.base_url }}/categoria/1"
-            name: 2.4 Desativar categoria
+            name: 2.6 Desativar categoria
             meta:
               id: req_c6ef63d666c54619a13aabfc13906783
               created: 1795290000000
-              modified: 1795225886239
+              modified: 1795235197043
               isPrivate: false
-              description: "Esperado: 204. Categoria some da listagem (ativo=false)."
+              description: "Esperado: 204."
               sortKey: 1795290011000
             method: DELETE
             settings:
@@ -557,11 +549,11 @@ collection:
                 store: true
               rebuildPath: true
           - url: "{{ _.base_url }}/categoria/1"
-            name: 2.5 Reativar categoria
+            name: 2.7 Reativar categoria
             meta:
               id: req_cec143aec61145f28c244589a26de4ed
               created: 1795290000000
-              modified: 1795232040990
+              modified: 1795235199641
               isPrivate: false
               description: "Esperado: 204."
               sortKey: 1795290012000
@@ -583,13 +575,13 @@ collection:
           description: ""
         children:
           - url: "{{ _.base_url }}/pessoas?ativo=false"
-            name: 1.2 Listar pessoas (inativas)
+            name: 1.3 Listar pessoas (inativas)
             meta:
               id: req_c4781fb99e0541f78d76c2d9b1d2f29b
               created: 1795231137229
-              modified: 1795231420522
+              modified: 1795234774579
               isPrivate: false
-              description: "Esperado: 200, página com as pessoas ativas."
+              description: "Esperado: 200, página com as pessoas inativas."
               sortKey: 1795290002500
             method: GET
             settings:
@@ -601,14 +593,13 @@ collection:
                 store: true
               rebuildPath: true
           - url: "{{ _.base_url }}/pessoas/1"
-            name: 1.3 Buscar pessoa por id
+            name: 1.4 Buscar pessoa por id
             meta:
               id: req_03725be974794449ba69d6cae501a9f4
               created: 1795290000000
-              modified: 1795229296817
+              modified: 1795235303553
               isPrivate: false
-              description: "Esperado: 200 com endereço aninhado. Id vem da variável
-                pessoa_id."
+              description: "Esperado: 200 com endereço aninhado."
               sortKey: 1795290003000
             method: GET
             settings:
@@ -620,11 +611,11 @@ collection:
                 store: true
               rebuildPath: true
           - url: "{{ _.base_url }}/pessoas/1"
-            name: 1.6 Reativar pessoa
+            name: 1.7 Reativar pessoa
             meta:
               id: req_3e349700e2aa417eb4803f398083e3db
               created: 1795290000000
-              modified: 1795232065472
+              modified: 1795234600900
               isPrivate: false
               description: "Esperado: 204. Pessoa volta para a listagem."
               sortKey: 1795290006000
@@ -642,7 +633,7 @@ collection:
             meta:
               id: req_da062ae66b9645fc8c735592d1813cc5
               created: 1795290000000
-              modified: 1795231160589
+              modified: 1795234147632
               isPrivate: false
               description: "Esperado: 200, página com as pessoas ativas."
               sortKey: 1795290002000
@@ -656,14 +647,13 @@ collection:
                 store: true
               rebuildPath: true
           - url: "{{ _.base_url }}/pessoas/1"
-            name: 1.5 Excluir pessoa (inativa, não apaga)
+            name: 1.6 Excluir pessoa (inativa, não apaga)
             meta:
               id: req_e1f6791882954c55af989ae32e6e6d3e
               created: 1795290000000
-              modified: 1795218559917
+              modified: 1795235288549
               isPrivate: false
-              description: "Esperado: 204. Pessoa some da listagem e continua no banco com
-                ativo=false."
+              description: "Esperado: 204. Pessoa desativada."
               sortKey: 1795290005000
             method: DELETE
             settings:
@@ -675,13 +665,13 @@ collection:
                 store: true
               rebuildPath: true
           - url: "{{ _.base_url }}/pessoas"
-            name: 1.4 Atualizar pessoa
+            name: 1.5 Atualizar pessoa
             meta:
               id: req_eadb4b90e1b84211b6e6eab31754f072
               created: 1795290000000
-              modified: 1795218522283
+              modified: 1795235297286
               isPrivate: false
-              description: "Esperado: 200. Só os campos enviados mudam. Ajuste o id no corpo."
+              description: "Esperado: 200. Só os campos enviados mudam."
               sortKey: 1795290004000
             method: PUT
             body:
@@ -710,10 +700,9 @@ collection:
             meta:
               id: req_f0de810b0e5e446685e49a71940536fe
               created: 1795290000000
-              modified: 1795218330612
+              modified: 1795238691691
               isPrivate: false
-              description: "Esperado: 201 Created + cabeçalho Location. Troque nome/endereço
-                no corpo."
+              description: "Esperado: 201 Created + cabeçalho Location."
               sortKey: 1795290001000
             method: POST
             body:
@@ -742,21 +731,6 @@ collection:
                 send: true
                 store: true
               rebuildPath: true
-cookieJar:
-  name: Default Jar
-  meta:
-    id: jar_99d30891da4bdcebc63947a8fc17f076de878684
-    created: 1709427205008
-    modified: 1711501096527
-  cookies:
-    - id: 8a271b2f-405f-4f13-90bc-b4357e3290d1
-      key: sessionId
-      value: 2d743ae5-5356-4fdc-a6fa-ced50b300e3a
-      domain: localhost
-      path: /
-      secure: false
-      httpOnly: false
-      hostOnly: true
 environments:
   name: Base Environment
   meta:
