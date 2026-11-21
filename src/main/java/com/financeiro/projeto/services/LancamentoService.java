@@ -44,6 +44,11 @@ public class LancamentoService {
     @Transactional
     public Lancamento atualizar(DadosAtualizarLancamento dados){
         var lancamento = detalhar(dados.id());
+        if (dados.dataPagamento() != null){
+            if (dados.dataPagamento().isBefore(lancamento.getDataVencimento() )){
+                throw new IllegalArgumentException("Data de pagamento não pode ser realizado antes do lançamento");
+            }
+        }
         if(lancamento.estaCancelado()){
             throw new IllegalArgumentException("Lançamento cancelado não pode ser alterado");
         }

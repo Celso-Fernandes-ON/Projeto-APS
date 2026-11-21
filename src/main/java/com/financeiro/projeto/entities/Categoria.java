@@ -29,13 +29,13 @@ public class Categoria {
     }
     public void desativar(){
         if (!this.getAtivo()){
-            throw new IllegalArgumentException("Categoria já está desativada");
+            throw new IllegalArgumentException("Categoria já está inativa");
         }
         this.ativo = false;
     }
     public void reativar(){
         if (this.getAtivo()){
-            throw new IllegalArgumentException("Categoria já está ativada");
+            throw new IllegalArgumentException("Categoria já está ativa");
         }
         this.ativo = true;
     }
