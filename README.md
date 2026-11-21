@@ -58,14 +58,16 @@ No log, confira a mensagem do Flyway: `Successfully applied 3 migrations`. A API
 
 ### Pessoa
 - Nasce **ativa**. `DELETE` apenas marca como **inativa** (`ativo = false`).
-- Só pessoas ativas aparecem na listagem. A busca por id mostra também as inativas, com o campo `ativo`.
+- A listagem mostra só as ativas por padrão. Para ver as inativas: `GET /pessoas?ativo=false`. A busca por id mostra também as inativas, com o campo `ativo`.
 - Pessoa inativa **não pode ser alterada** e **não pode receber novos lançamentos**.
-- `PATCH /pessoas/reativar/{id}` reativa.
+- `PATCH /pessoas/{id}` reativa.
+- Inativar uma pessoa já inativa, ou reativar uma já ativa, retorna 400 (`Pessoa já está inativa` / `Pessoa já está ativa`).
 - O CEP deve ter 8 dígitos.
 
 ### Categoria
-- Mesma lógica de Pessoa: `DELETE` desativa, a listagem mostra só as ativas, e categoria inativa não pode ser alterada nem usada em novos lançamentos.
-- `PATCH /categoria/reativar/{id}` reativa.
+- Mesma lógica de Pessoa: `DELETE` desativa, a listagem mostra só as ativas (`GET /categoria?ativo=false` lista as inativas), e categoria inativa não pode ser alterada nem usada em novos lançamentos.
+- `PATCH /categoria/{id}` reativa.
+- Desativar uma categoria já inativa, ou reativar uma já ativa, retorna 400 (`Categoria já está inativa` / `Categoria já está ativa`).
 
 ### Lançamento
 - `tipo`: `RECEITA` ou `DESPESA`. O `valor` deve ser positivo.
@@ -77,6 +79,7 @@ No log, confira a mensagem do Flyway: `Successfully applied 3 migrations`. A API
 | `REALIZADO` | Criado **com** `dataPagamento`, ou quando a data de pagamento é informada depois (PUT) |
 | `CANCELADO` | Resultado do `DELETE` |
 
+- A `dataPagamento` não pode ser anterior à `dataVencimento`. A regra vale no cadastro e na atualização (no PUT, considera o valor que ficará após a alteração) e retorna 400.
 - `DELETE` **cancela** o lançamento, sem apagar. Um lançamento cancelado não pode ser alterado nem cancelado de novo.
 - A listagem padrão mostra pendentes e realizados. Para ver por status: `GET /lancamento?status=CANCELADO`.
 
@@ -88,10 +91,11 @@ No log, confira a mensagem do Flyway: `Successfully applied 3 migrations`. A API
 |---|---|---|---|
 | POST | `/pessoas` | Cadastrar | 201 + `Location` |
 | GET | `/pessoas` | Listar ativas (paginado) | 200 |
+| GET | `/pessoas?ativo=false` | Listar inativas (paginado) | 200 |
 | GET | `/pessoas/{id}` | Detalhar | 200 |
 | PUT | `/pessoas` | Atualizar (`id` no corpo) | 200 |
 | DELETE | `/pessoas/{id}` | Inativar | 204 |
-| PATCH | `/pessoas/reativar/{id}` | Reativar | 204 |
+| PATCH | `/pessoas/{id}` | Reativar | 204 |
 
 ### Categorias — `/categoria`
 
@@ -99,10 +103,11 @@ No log, confira a mensagem do Flyway: `Successfully applied 3 migrations`. A API
 |---|---|---|---|
 | POST | `/categoria` | Cadastrar | 201 + `Location` |
 | GET | `/categoria` | Listar ativas (paginado) | 200 |
+| GET | `/categoria?ativo=false` | Listar inativas (paginado) | 200 |
 | GET | `/categoria/{id}` | Detalhar | 200 |
 | PUT | `/categoria/{id}` | Atualizar nome (`id` na URL) | 200 |
 | DELETE | `/categoria/{id}` | Desativar | 204 |
-| PATCH | `/categoria/reativar/{id}` | Reativar | 204 |
+| PATCH | `/categoria/{id}` | Reativar | 204 |
 
 ### Lançamentos — `/lancamento`
 
@@ -168,7 +173,7 @@ As listagens aceitam paginação: `?page=0&size=10&sort=nome`. O padrão é 10 p
 | Situação | Status | Resposta |
 |---|---|---|
 | Registro não encontrado | 404 | Texto, por exemplo `Pessoa não encontrada` |
-| Regra de negócio violada (pessoa inativa, lançamento cancelado etc.) | 400 | Texto com o motivo |
+| Regra de negócio violada (pessoa inativa, lançamento cancelado, pagamento antes do vencimento etc.) | 400 | Texto com o motivo |
 | Campo obrigatório ausente ou inválido | 400 | Lista de `{ campo, mensagem }` |
 | Valor de `tipo` ou `status` inválido | 400 | `{ "codigo": "TIPO_INVALIDO", "mensagem": "... Use um destes: [RECEITA, DESPESA]" }` |
 | Data fora do formato `AAAA-MM-DD` | 400 | `{ "codigo": "DATA_INVALIDA", ... }` |
@@ -201,4 +206,4 @@ src/main/java/com/financeiro/projeto/
 
 ## Testando a API
 
-O arquivo `Projeto-APS-apresentacao.yaml` é uma coleção do **Insomnia** com as requisições na ordem de uso. Importe em *Import*. Os ids e o status ficam nas variáveis do ambiente (*Manage Environments*), e cada requisição indica o resultado esperado.
+O arquivo `docs/Projeto-APS.yaml` é uma coleção do **Insomnia** com as requisições na ordem de uso. Importe em *Import*. O endereço base fica na variável `base_url` do ambiente (*Manage Environments*), e cada requisição indica o resultado esperado. Os ids usados nas requisições (`1`, `2`) devem ser ajustados conforme os registros criados.
