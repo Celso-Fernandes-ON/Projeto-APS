@@ -27,9 +27,9 @@ public class LancamentoService {
     private CategoriaRepository categoriaRepository;
 
     private void validarDatas(LocalDate vencimento, LocalDate pagamento) {
-        if (pagamento != null && pagamento.isBefore(vencimento)) {
+        if (pagamento != null && pagamento.isAfter(vencimento)) {
             throw new IllegalArgumentException(
-                    "Data de pagamento não pode ser anterior à data de vencimento");
+                    "Data de pagamento não pode ser posterior à data de vencimento");
         }
     }
     @Transactional
